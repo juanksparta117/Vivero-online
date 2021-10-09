@@ -1,15 +1,29 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container-fluid">
-    <div class="media">
-        
-            <img class="mr-3" src="{{ MEDIA_URL }}{{ planta.imagen }}" width="100px"/>
-            <div class="media-body">
-                <h2 class="mt-0">{{ planta.nombrecomun }}</h2>
-                <p><strong>Tipo:</strong> {{ planta.tipo }}</p>
-                <p><strong>Valor unitario:</strong> {{ planta.preciounidad }}</p>
+    <div class="row">
+        <div class="col-md-7 col-xs-7 col-sm-7">
+            <div class="media list-group list-group-item">
+                <img class="mr-3" src="{{ MEDIA_URL }}{{ planta.imagen }}" width="150px"/>
+                <div class="media-body">
+                    <h2 class="mt-0">{{ planta.nombrecomun }}</h2>
+                    <p><strong>Tipo:</strong> {{ planta.tipo }}</p>
+                    <p><strong>Valor unitario:</strong> {{ planta.preciounidad }}</p>
+                    {% if user.groups.all.0.name == 'viverista' %}
+                        <a href="{% url 'editar_planta' planta.pk %}">
+                            <button type="button" class="btn btn-info " >
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </button>
+                        </a>
+                        <a href="{% url 'borrar_planta' planta.pk %}">
+                            <button type="button" class="btn btn-danger " >
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </a>
+                    {% endif %}
+                </div>
             </div>
-        
+        </div>
     </div>
 </div>
 {% endblock %}

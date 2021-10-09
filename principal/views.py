@@ -36,3 +36,18 @@ def crear_planta(request):
     else:
         form = CrearPlantaForm()
         return render(request, 'crear_planta.html', {'form':form})
+
+def editar_planta(request, pk, template_name='editar_planta.html'):
+    planta = get_object_or_404(Planta, pk=pk)
+    form = CrearPlantaForm(request.POST or None, instance=planta)
+    if form.is_valid():
+        form.save()
+        return redirect('inventario')
+    return render(request, template_name, {'form':form})
+
+def borrar_planta(request, pk, template_name='confirma_borrado.html'):
+    planta = get_object_or_404(Planta, pk=pk)
+    if request.method=='POST':
+        planta.delete()
+        return redirect('inventario')
+    return render(request, template_name, {'object':planta})
