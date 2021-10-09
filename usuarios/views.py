@@ -5,6 +5,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from .models import Usuario
 from .forms import SignUpForm, UserRegisterForm
 from django.contrib import messages
+from django.contrib.auth.models import Group
 
 # Create your views here.
 def usuario(request):
@@ -41,7 +42,12 @@ def registro(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            group = Group.objects.get(name='cliente')
+            es_viverista = form.cleaned_data.get('group')
+            if es_viverista:
+                group = Group.objects.get(name='viverista')
+            user.groups.add(group)
             usuario = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password1')
             usuario = authenticate(username=usuario, password=password)

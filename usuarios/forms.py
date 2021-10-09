@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 
 class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=140, required=True)
@@ -25,6 +25,7 @@ class UserRegisterForm(UserCreationForm):
     email = forms.EmailField(required=True)
     password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Confirmar contraseña', widget=forms.PasswordInput)
+    group = forms.BooleanField(label='Soy viverista', required=False, initial=False)
 
     class Meta:
         model = User
