@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid">
+    <div class="media">
+        
+            <img class="mr-3" src="{{ MEDIA_URL }}{{ planta.imagen }}" width="100px"/>
+            <div class="media-body">
+                <h2 class="mt-0">{{ planta.nombrecomun }}</h2>
+                <p><strong>Tipo:</strong> {{ planta.tipo }}</p>
+                <p><strong>Valor unitario:</strong> {{ planta.preciounidad }}</p>
+            </div>
+        
+    </div>
+</div>
+{% endblock %}
