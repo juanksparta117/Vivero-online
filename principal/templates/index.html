@@ -3,7 +3,23 @@
 {% block content %}
 <div class="container-fluid">
 	<div class="row">
-		
+		{% if not request.user.is_authenticated %}
+		<section id="content">
+			<h1>Tus plantas<br> favoritas en <br> un clic </h1>
+			<p>Somos la plataforma líder en <br>el mercado que conecta <br>viveristas con amantes de las <br>plantas, encuentra y compra<br> tus favoritas aquí</p>
+			<br>
+			<a href="{% url 'registro' %}">
+				<button>Regístrate</button>
+			</a> 
+			<br>
+			<br>
+		</section>
+		<aside>
+			<a href="{% url 'index' %}">     
+				<img class="fotohome" src="{% static 'assets/home.png' %}" style="float:right; max-height:600%; width:auto; position: relative; padding-right: 100px;"/>
+			</a>
+		</aside>
+		{% endif %}
 	</div>
 </div>
 {% endblock %}

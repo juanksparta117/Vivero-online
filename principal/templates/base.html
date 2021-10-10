@@ -6,6 +6,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https//maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap-theme.min.css">
 <link rel="stylesheet" type="text/css" href="{% static 'css/estilo.css' %}">
 </head>
 <body>
@@ -18,8 +19,12 @@
                 {% if request.user.is_authenticated %}
                     <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
                 {% else %}
-                    <li><a href="{% url 'registro' %}">Registrarse</a></li>
-                    <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
+                    <li><a href ="#">Plantas de Temporada</a></li>
+                    <li><a href ="#">Buscar cerca de ti</a></li>
+                    <li><a href ="#">Las más vendidas</a></li>
+                    <li><a href ="#">Blog</a></li>
+                    <li style="float: right; margin-right: 5px;"><a href="{% url 'registro' %}">Registrarse</a></li>
+                    <li style="float: right; margin-right: 5px;"><a href="{% url 'login' %}">Iniciar sesión</a></li>
                 {% endif %}
             </ul>
         </nav>
@@ -31,8 +36,9 @@
         {% endfor %}
     </ul>
     {% endif %}
-    <div class="col-sm-2" >
-        {% if request.user.is_authenticated %}
+    
+    {% if request.user.is_authenticated %}
+        <div class="col-sm-2" >
             <div style="font-size: 14px;">
                 {% if request.user.is_authenticated %}
                     <p>Bienvenido, <strong>{{ user.get_username }} ({{ user.groups.all.0 }})</strong></p>
@@ -44,11 +50,11 @@
                 <li class="nav-item"><a href="{% url 'crear_planta' %}">Crear planta</a></li>
                 {% endif %}
             </ul>
-        {% endif %}
-    </div>
-    <div class="col-sm-10 ">
-        {% block content %}{% endblock %}
-    </div>
+        </div>
+    {% endif %}
+    {% block content %}{% endblock %}
+    <div class="clearfix"></div>
+    <footer> tuvivero.com &copy copyright 2021</footer>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
